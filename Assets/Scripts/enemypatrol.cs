@@ -7,15 +7,29 @@ public class enemypatrol : MonoBehaviour
     private bool movingRight;
     public Transform groundDetect;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
+ 
 
     // Update is called once per frame
     void Update()
     {
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        RaycastHit2D groundCheck = Physics2D.Raycast(groundDetect.position, Vector2.down, rayDist);
+
+        if (groundCheck.collider == false)
+        {
+            if (movingRight)
+            {
+                transform.eulerAngles = new Vector3(0, -100, 0);
+                movingRight = false;
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                movingRight = true;
+            }
+          
+
+        }
 
     }
 }
