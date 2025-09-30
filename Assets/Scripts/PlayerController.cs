@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     }
     public bool ExtendedRayCollisionCheck(float xoffs, float yoffs)
     {
-        sr.flipX = true;
+
 
         float rayLength = 0.2f; // length of raycast
         bool hitSomething = false;
@@ -73,16 +73,27 @@ public class PlayerController : MonoBehaviour
         {
             velocity.x = 1;
             anim.SetBool("Run", true);
+            sr.flipX = false;
+        }
+        else
+        {
+            anim.SetBool("Run", false);
         }
         if (Input.GetKey(KeyCode.A))
         {
             velocity.x = -1;
+            anim.SetBool("Run", true);
+            sr.flipX = true;
+        }
+        else
+        {
             anim.SetBool("Run", false);
         }
 
 
 
-        rb.linearVelocity = velocity;
+
+            rb.linearVelocity = velocity;
 
         isGrounded = ExtendedRayCollisionCheck(0, 0);
         
